@@ -1,41 +1,53 @@
-import React, {Component} from 'react'
+import React, { Component } from "react";
 
 export default class SetName extends Component {
+  constructor(props) {
+    super(props);
 
-	constructor (props) {
-		super(props)
+    this.state = {};
+  }
 
-		this.state = {}
-	}
+  //	------------------------	------------------------	------------------------
 
-//	------------------------	------------------------	------------------------
+  render() {
+    return (
+      <div id="SetName">
+        <h1>Set Name</h1>
 
-	render () {
-		return (
-			<div id='SetName'>
+        <div ref="nameHolder" className="input_holder left">
+          <label>Name </label>
+          <input
+            ref="name"
+            type="text"
+            className="input name"
+            placeholder="Name"
+            style={{ textTransform: "capitalize" }}
+          />
+        </div>
 
-				<h1>Set Name</h1>
+        <button
+          type="submit"
+          onClick={this.saveName.bind(this)}
+          className="button"
+        >
+          <span>
+            SAVE <span className="fa fa-caret-right"></span>
+          </span>
+        </button>
+      </div>
+    );
+  }
 
-				<div ref='nameHolder' className='input_holder left'>
-					<label>Name </label>
-					<input ref='name' type='text' className='input name' placeholder='Name' />
-				</div>
+  //	------------------------	------------------------	------------------------
 
+  saveName(e) {
+    // const { name } = this.refs
+    // const { onSetName } = this.props
+    // onSetName(name.value.trim())
+    const capitalisedName =
+      this.refs.name.value.charAt(0).toUpperCase() +
+      this.refs.name.value.slice(1);
 
-				<button type='submit' onClick={this.saveName.bind(this)} className='button'><span>SAVE <span className='fa fa-caret-right'></span></span></button>
-
-			</div>
-		)
-	}
-
-//	------------------------	------------------------	------------------------
-
-	saveName (e) {
-		// const { name } = this.refs
-		// const { onSetName } = this.props
-		// onSetName(name.value.trim())
-
-		this.props.onSetName(this.refs.name.value.trim())
-	}
-
+    this.props.onSetName(capitalisedName.trim());
+  }
 }
